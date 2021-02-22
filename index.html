@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Ayoub Fedil">
+    <script src="script.js"></script>
+    <link rel="icon" href="./images/kotlin.png">
+    <link rel="stylesheet" href="doc.css">
+
+    <title>Kotlin Documentation</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="nav-bar">
+            <nav id="navbar">
+                <div class="toggleButt">
+<a href="#" class="toggle-button">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                      </a></div>
+                <header id="header"><h2>Introduction to Kotlin</h2></header>
+                <div class="nav-wrap">
+                <ul>
+                    <li> <a href="#Hello_World" class="nav-link">Hello World</a> </li>
+                    <li><a href="#Functions" class="nav-link">Functions</a> </li>
+                    <li><a href="#Variables" class="nav-link">Variables</a> </li>
+                    <li><a href="#Null_Safety" class="nav-link"> Null Safety</a> </li>
+                    <li><a href="#Classes" class="nav-link">Classes</a> </li>
+                    <li><a href="#Generics" class="nav-link">Generics</a> </li>
+                    <li><a href="#Inheritance" class="nav-link">Inheritance</a> </li>
+                    <li><a href="#Reference" class="nav-link"> Reference</a> </li>
+                </ul></div>
+            </nav>
+        </div>
+        <div id="doc">
+            <main id="main-doc">
+                <section class="main-section" id="Hello_World">
+                    <header class="head">
+                        Hello World
+
+                    </header>
+                    <div class="code">
+                        <code>
+            package org.kotlinlang.play  // 1 <br>
+
+            fun main() {                        // 2 <br>
+
+                println("Hello, World!")        // 3 <br>
+            }</code>
+                    </div>
+                    <article>
+                        <ol>
+                            <li>Kotlin code is usually defined in packages. Package specification is optional: If you
+                                don't
+                                specify a package in a source file, its content goes to the default package.</li>
+                            <li>An entry point to a Kotlin application is the <code>main</code> function. In Kotlin 1.3,
+                                you can
+                                declare <code>main</code> without any parameters. The return type is not specified,
+                                which means
+                                that the function returns nothing.</li>
+                            <li><code>println</code> writes a line to the standard output. It is imported implicitly.
+                                Also note
+                                that semicolons are optional.</li>
+                        </ol>
+                        In Kotlin versions earlier than 1.3, the main function must have a parameter of type
+                        <code>ArraycString&gt;</code> . <br>
+                        <div class="code"> <code>
+                fun main(args: Array&lt;String&gt;) { <br>
+                println("Hello, World!")<br>
+            }</code></div>
+                    </article>
+
+
+
+
+
+
+                </section>
+                <section class="main-section" id="Functions">
+                    <header class="head">
+                        Functions
+                    </header>
+
+                    <h4>Default Parameter Values and Named Arguments</h4>
+                    <div class="code"> <code>fun printMessage(message: String): Unit {                               // 1 <br>
+            println(message) <br>
+        } <br>
+        
+        fun printMessageWithPrefix(message: String, prefix: String = "Info") {  // 2 <br>
+            println("[$prefix] $message") <br>
+        } <br>
+        
+        fun sum(x: Int, y: Int): Int {                                           // 3<br>
+            return x + y <br>
+        } <br>
+        
+        fun multiply(x: Int, y: Int) = x * y                                    // 4<br>
+        
+        fun main() { 
+            printMessage("Hello")   <br>                                            // 5   <br>                 
+            printMessageWithPrefix("Hello", "Log")                             // 6<br> 
+            printMessageWithPrefix("Hello")                                     // 7<br>
+            printMessageWithPrefix(prefix = "Log", message = "Hello")          // 8 <br>
+            println(sum(1, 2))                                                  // 9<br>
+            println(multiply(2, 4))                                             // 10 <br>
+        }</code></div>
+                    <article>
+                        <ol>
+                            <li>A simple function that takes a parameter of type <code>String</code> and returns
+                                <code>Unit</code> (i.e., no return value).
+                            </li>
+                            <li>A function that takes a second optional parameter with default value Info. The return
+                                type is
+                                omitted, meaning that it's actually <code>Unit</code> .</li>
+                            <li>A function that returns an integer.</li>
+                            <li>A single-expression function that returns an integer (inferred).</li>
+                            <li>Calls the first function with the argument <code>Hello</code> .</li>
+                            <li>Calls the function with two parameters, passing values for both of them.</li>
+                            <li>Calls the same function omitting the second one. The default value <code>Info</code> is
+                                used.
+                            </li>
+                            <li>Calls the same function using named arguments and changing the order of the arguments.
+                            </li>
+                            <li>Prints the result of the <code>sum</code> function call.</li>
+                            <li>Prints the result of the <code> multiply</code> function call.</li>
+                        </ol>
+                    </article>
+                    <h4>Infix Functions</h4>
+                    <p>Member functions and extensions with a single parameter can be turned into infix functions.</p>
+                    <div class="code"> <code>fun main() {<br>
+
+                    infix fun Int.times(str: String) = str.repeat(this)        // 1<br>
+                    println(2 times "Bye ")                                    // 2<br>
+                  <br>
+                    val pair = "Ferrari" to "Katrina"                          // 3<br>
+                    println(pair)
+                  
+                    infix fun String.onto(other: String) = Pair(this, other)   // 4<br>
+                    val myPair = "McLaren" onto "Lucas"<br>
+                    println(myPair)<br>
+                  
+                    val sophia = Person("Sophia")<br>
+                    val claudia = Person("Claudia")<br>
+                    sophia likes claudia                                       // 5<br>
+                  }<br>
+                  <br>
+                  class Person(val name: String) {<br>
+                    val likedPeople = mutableListOf<Person>()<br>
+                    infix fun likes(other: Person) { likedPeople.add(other) }  // 6<br>
+                  }</code></div>
+
+                    <ol>
+                        <li>Defines an infix extension function on Int.</li>
+                        <li>Calls the infix function.</li>
+                        <li>Creates a Pair by calling the infix function to from the standard library.</li>
+                        <li>Here's your own implementation of to creatively called onto.</li>
+                        <li>Infix notation also works on members functions (methods).</li>
+                        <li>The containing class becomes the first parameter.</li>
+
+                    </ol>
+                    <p>Note that the example uses local functions (functions nested within another function).</p>
+                    <h4>Operator Functions</h4>
+                    <p>Certain functions can be "upgraded" to operators, allowing their calls with the corresponding
+                        operator
+                        symbol.</p>
+                    <div class="code"> <code>operator fun Int.times(str: String) = str.repeat(this)       // 1 <br>
+                        println(2 * "Bye ")                                          // 2 <br>
+                         <br>
+                        operator fun String.get(range: IntRange) = substring(range)  // 3 <br>
+                        val str = "Always forgive your enemies; nothing annoys them so much." <br>
+                        println(str[0..14])                                          // 4</code></div>
+                    <ol>
+                        <li>This takes the infix function from above one step further using the operator modifier.</li>
+                        <li>The operator symbol for <code>times()</code> is <code> *</code> so that you can call the
+                            function
+                            using <code>2 * "Bye"</code> .</li>
+                        <li>An operator function allows easy range access on strings.</li>
+                        <li>The get() operator enables bracket-access syntax.</li>
+                    </ol>
+                    <h4>Functions with <code>vararg</code> Parameters </h4>
+                    <p>Varargs allow you to pass any number of arguments by separating them with commas.</p>
+                    <div class="code"> <code>
+                        fun printAll(vararg messages: String) {                            // 1 <br>
+                        for (m in messages) println(m) <br>
+                    } <br>
+                    printAll("Hello", "Hallo", "Salut", "Hola", "你好")                 // 2 <br>
+                    
+                    fun printAllWithPrefix(vararg messages: String, prefix: String) {  // 3 <br>
+                        for (m in messages) println(prefix + m) <br>
+                    } <br>
+                    printAllWithPrefix( <br>
+                        "Hello", "Hallo", "Salut", "Hola", "你好", <br>
+                        prefix = "Greeting: "                                          // 4 <br>
+                    ) <br>
+                     <br>
+                    fun log(vararg entries: String) { <br>
+                        printAll(*entries)                                             // 5 <br>
+                    }</code></div>
+                    <ol>
+                        <li>The <code>vararg</code> modifier turns a parameter into a vararg.</li>
+                        <li>This allows calling <code>printAll</code> with any number of string arguments.</li>
+                        <li>Thanks to named parameters, you can even add another parameter of the same type after the
+                            vararg.
+                            This wouldn't be allowed in Java because there's no way to pass a value.</li>
+                        <li>Using named parameters, you can set a value to <code>prefix</code> separately from the
+                            vararg.</li>
+                        <li>At runtime, a vararg is just an array. To pass it along into a vararg parameter, use the
+                            special
+                            spread operator <code>*</code> that lets you pass in <code>*entries</code> (a vararg of
+                            <code>String</code> ) instead of entries (an Array&lt;String&gt;).
+                        </li>
+                    </ol>
+                </section>
+                <section class="main-section" id="Variables">
+                    <header class="head">
+                        Variables
+                    </header>
+
+                    <p>Kotlin has powerful type inference. While you can explicitly declare the type of a variable,
+                        you'll
+                        usually let the compiler do the work by inferring it. Kotlin does not enforce immutability,
+                        though it is
+                        recommended. In essence use val over var.</p>
+                    <div class="code"> <code>
+            var a: String = "initial"  // 1 <br>
+            println(a) <br>
+            val b: Int = 1             // 2 <br>
+            val c = 3                  // 3</code></div>
+                    <ol>
+                        <li>Declares a mutable variable and initializes it.</li>
+                        <li>Declares an immutable variable and initializes it.</li>
+                        <li>Declares an immutable variable and initializes it without specifying the type. The compiler
+                            infers
+                            the type <code>Int</code> .</li>
+
+                    </ol>
+                    <div class="code"> <code>var e: Int  // 1 <br>
+            println(e)  // 2</code></div>
+                    <ol>
+                        <li>Declares a variable without initialization.</li>
+                        <li>An attempt to use the variable causes a compiler error:
+                            <code> Variable 'e' must be initialized</code>.
+                        </li>
+                    </ol>
+                    <p>You're free to choose when you initialize a variable, however, it must be initialized before the
+                        first
+                        read.</p>
+                    <div class="code"><code>
+                val d: Int  // 1 <br>
+                if (someCondition()) { <br>
+                    d = 1   // 2 <br>
+                } else { <br>
+                    d = 2   // 2 <br>
+                } <br>
+                println(d) // 3 <br>
+            </code></div>
+                    <ol>
+                        <li>Declares a variable without initialization.</li>
+                        <li>Initializes the variable with different values depending on some condition.</li>
+                        <li>Reading the variable is possible because it's already been initialized.</li>
+                    </ol>
+                </section>
+
+                <section class="main-section" id="Null_Safety">
+                    <header class="head">
+                        Null Safety
+                    </header>
+
+                    <p>In an effort to rid the world of <code>NullPointerException</code> , variable types in Kotlin
+                        don't allow
+                        the assignment of <code>null</code> . If you need a variable that can be null, declare it
+                        nullable by
+                        adding <code>?</code> at the end of its type.</p>
+                    <div class="code"> <code>var neverNull: String = "This can't be null"            // 1 <br>
+
+            neverNull = null                                        // 2 <br>
+             <br>
+            var nullable: String? = "You can keep a null here"      // 3 <br>
+             <br>
+            nullable = null                                         // 4 <br>
+             <br>
+            var inferredNonNull = "The compiler assumes non-null"   // 5 <br>
+             <br>
+            inferredNonNull = null                                  // 6 <br>
+             <br>
+            fun strLength(notNull: String): Int {                   // 7 <br>
+                return notNull.length <br>
+            } <br>
+            
+            strLength(neverNull)                                    // 8 <br>
+            strLength(nullable)                                     // 9</code></div>
+                    <ol>
+                        <li>Declares a non-null String variable.</li>
+                        <li>When trying to assign null to non-nullable variable, a compilation error is produced.</li>
+                        <li>Declares a nullable String variable.</li>
+                        <li>Sets the null value to the nullable variable. This is OK.</li>
+                        <li>When inferring types, the compiler assumes non-null for variables that are initialized with
+                            a value.
+                        </li>
+                        <li>When trying to assign null to a variable with inferred type, a compilation error is
+                            produced.
+                            Declares a function with a non-null string parameter.</li>
+                        <li>Calls the function with a String (non-nullable) argument. This is OK.</li>
+                        <li>When calling the function with a String? (nullable) argument, a compilation error is
+                            produced.</li>
+
+                    </ol>
+                    <h4>Working with Nulls</h4>
+                    <p>Sometimes Kotlin programs need to work with null values, such as when interacting with external
+                        Java code
+                        or representing a truly absent state. Kotlin provides null tracking to elegantly deal with such
+                        situations.</p>
+                    <div class="code"> <code>
+                fun describeString(maybeString: String?): String {     <br>          // 1
+                    if (maybeString != null && maybeString.length > 0) {  <br>       // 2
+                        return "String of length ${maybeString.length}" <br>
+                    } else { <br>
+                        return "Empty or null string"    <br>                        // 3
+                    } <br>
+                }
+            </code></div>
+                    <ol>
+                        <li> A function that takes in a nullable string and returns its description.</li>
+                        <li>If the given string is not null and not empty, return information about its length.</li>
+                        <li>Otherwise, tell the caller that the string is empty or null.</li>
+
+                    </ol>
+                </section>
+                <section class="main-section" id="Classes">
+                    <header class="head">
+                        Classes
+                    </header>
+                    <p>
+                        The class declaration consists of the class name, the class header (specifying its type
+                        parameters, the primary constructor etc.) and the class body, surrounded by curly braces. Both
+                        the header and the body are optional; if the class has no body, curly braces can be omitted.
+                    </p>
+                    <div class="code"> <code>
+                class Customer                                  // 1 <br>
+
+class Contact(val id: Int, var email: String)   // 2 <br>
+ <br>
+fun main() {
+ <br>
+    val customer = Customer()                   // 3 <br>
+    
+    val contact = Contact(1, "mary@gmail.com")  // 4 <br>
+
+    println(contact.id)                         // 5 <br>
+    contact.email = "jane@gmail.com"            // 6 <br>
+}
+            </code></div>
+                    <ol>
+                        <li>Declares a class named <code>Customer</code> without any properties or user-defined
+                            constructors. A non-parameterized default constructor is created by Kotlin automatically.
+                        </li>
+                        <li>Declares a class with two properties: immutable <code>id</code> and mutable
+                            <code>email</code> , and a constructor with two parameters <code>id</code> and
+                            <code>email</code> .
+                        </li>
+                        <li>Creates an instance of the class Customer via the default constructor. Note that there is no
+                            new keyword in Kotlin.</li>
+                        <li>Creates an instance of the class Contact using the constructor with two arguments.</li>
+                        <li>Accesses the property id.</li>
+                        <li>Updates the value of the property email.</li>
+                    </ol>
+                </section>
+                <section class="main-section" id="Generics">
+                    <header class="head">
+                        Generics
+
+                    </header>
+                    <p>You can also generify functions if their logic is independent of a specific type. For instance,
+                        you can write a utility function to create mutable stacks:</p>
+                    <div class="code"> <code>
+                class MutableStack&gt;E&lt;(vararg items: E) {              // 1 <br>
+ <br>
+                    private val elements = items.toMutableList() <br>
+                   <br>
+                    fun push(element: E) = elements.add(element)        // 2 <br>
+                  
+                    fun peek(): E = elements.last()                     // 3 <br>
+                  
+                    fun pop(): E = elements.removeAt(elements.size - 1) <br>
+                   <br>
+                    fun isEmpty() = elements.isEmpty() <br>
+                  
+                    fun size() = elements.size <br>
+                  
+                    override fun toString() = "MutableStack(${elements.joinToString()})" <br>
+            </code></div>
+                    <h4>Generic Functions</h4>
+                    <p>You can also generify functions if their logic is independent of a specific type. For instance,
+                        you can write a utility function to create mutable stacks:</p>
+                    <ol>
+                        <li>Defines a generic class MutableStack<E> where E is called the generic type parameter. At
+                                use-site, it is assigned to a specific type such as Int by declaring a MutableStack<Int>
+                                    .</li>
+                        <li>Inside the generic class, E can be used as a parameter like any other type.</li>
+                        <li>You can also use E as a return type.</li>
+                    </ol>
+                    <p></p>
+                    <div class="code"> <code>*
+                fun &gt;E&lt; mutableStackOf(vararg elements: E) = MutableStack(*elements) <br>
+ <br>
+                    fun main() { <br>
+                      val stack = mutableStackOf(0.62, 3.14, 2.7) <br>
+                      println(stack) <br>
+                    } <br>
+            </code></div>
+                    <p>Note that the compiler can infer the generic type from the parameters of mutableStackOf so that
+                        you don't have to write <code>mutableStackOf&gt;Double&lt;(...)</code> .</p>
+                </section>
+                <section class="main-section" id="Inheritance">
+                    <header class="head">
+                        Inheritance
+                    </header>
+
+                    <p>Kotlin fully supports the traditional object-oriented inheritance mechanism.</p>
+                    <div class="code"> <code>
+                open class Dog {                // 1 <br>
+                    open fun sayHello() {       // 2 <br>
+                        println("wow wow!") <br>
+                    } <br>
+                } <br>
+                 <br>
+                class Yorkshire : Dog() {       // 3 <br>
+                    override fun sayHello() {   // 4 <br>
+                        println("wif wif!") <br>
+                    } <br>
+                } <br>
+                 <br>
+                fun main() { <br>
+                    val dog: Dog = Yorkshire() <br>
+                    dog.sayHello() <br>
+                }
+            </code></div>
+                    <ol>
+                        <li>Kotlin classes are final by default. If you want to allow the class inheritance, code mark
+                            the class
+                            with the <code>open</code> modifier.</li>
+                        <li>Kotlin methods are also final by default. As with the classes, the <code> open</code>
+                            modifier
+                            allows overriding them.</li>
+                        <li>A class inherits a superclass when you specify the : <code>SuperclassName()</code> after its
+                            name.
+                            The empty parentheses <code>()</code> indicate an invocation of the superclass default
+                            constructor.
+                        </li>
+                        <li>Overriding methods or attributes requires the <code>override</code> modifier.</li>
+                    </ol>
+                    <h4>Inheritance with Parameterized Constructor</h4>
+                    <div class="code"> <code>
+                    open class Tiger(val origin: String) { <br>
+                        fun sayHello() { <br>
+                            println("A tiger from $origin says: grrhhh!") <br>
+                        } <br>
+                    } <br>
+                     <br>
+                    class SiberianTiger : Tiger("Siberia")                  // 1 <br>
+                     <br>
+                    fun main() { <br>
+                        val tiger: Tiger = SiberianTiger() <br>
+                        tiger.sayHello() <br>
+                    }
+                </code></div>
+                    <p>If you want to use a parameterized constructor of the superclass when creating a subclass,
+                        provide the
+                        constructor arguments in the subclass declaration.</p>
+                    <h4>Passing Constructor Arguments to Superclass</h4>
+                    <div class="code"> <code>open class Lion(val name: String, val origin: String) { <br>
+                    fun sayHello() { <br>
+                        println("$name, the lion from $origin says: graoh!") <br>
+                    } <br>
+                } <br>
+                 <br>
+                class Asiatic(name: String) : Lion(name = name, origin = "India") // 1 <br>
+                 <br>
+                fun main() { <br>
+                    val lion: Lion = Asiatic("Rufo")                              // 2 <br>
+                    lion.sayHello() <br>
+                }</code></div>
+                    <ol>
+                        <li> <code>name</code> in the <code>Asiatic</code> declaration is neither a <code>var</code> nor
+                            <code>val:</code> it's a constructor argument, whose value is passed to the
+                            <code>name</code> property of the superclass <code>Lion</code> .
+                        </li>
+                        <li>Creates an <code>Asiatic</code> instance with the name <code>Rufo</code> . The call invokes
+                            the <code>Lion</code> constructor with arguments Rufo and <code>India</code> .</li>
+                    </ol>
+                </section>
+
+                <section class="main-section" id="Reference">
+                    <header class="head">Reference</header>
+                    <p><a
+                            href="https://play.kotlinlang.org/byExample/01_introduction/06_Generics">
+                            https://play.kotlinlang.org/byExample/01_introduction/06_Generics</a>
+                    </p>
+
+                </section>
+
+            </main>
+        </div>
+    </div>
+    
+</body>
+
+</html>

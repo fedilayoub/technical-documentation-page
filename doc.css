@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+*,body,html{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins";
+    width: 100%;
+  
+   
+}
+.container{
+ 
+  width: 95vw;
+  margin: 0 auto;
+  padding-top:1em ;
+  justify-content: space-around;
+ 
+}
+#header{
+  font-size: 12px;
+  
+}
+#navbar{
+    height: 100vh;
+    width: 18%;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    float: left;
+    justify-content: flex-start;
+    border: 1px #8f8f8f solid ;
+    border-radius: 2px;
+    padding: 1em .5em;
+    
+  }
+  #navbar ul{
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+  }
+  #navbar li{
+    display: flex;
+    flex-direction: column;
+    
+  }
+.nav-wrap{
+  width: 100%;
+  height: fit-content;
+}
+  .nav-link{
+    text-decoration: none;
+    text-align: center;
+    color: black;
+    margin-top: 1rem;
+    font-weight: bold;
+    background-color: #f3f5e3;
+  }
+  #doc{
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    float: right;
+    margin-left: 1em;
+    padding: 1rem 2rem;
+  }
+  .head{
+    font-weight:bold;
+    font-size: 36px;
+  }
+  code{
+    background-color:#f3f5e3;
+    font-family: monospace;
+  }
+  .code{
+    height: fit-content;
+    background-color:#f3f5e3 ;
+    padding: 1rem 2rem;
+    margin: 1em auto;
+    border-radius: 5px;
+  }
+  .main-section{
+    border:1px rgb(110, 108, 108) solid;
+    padding: .5rem 3rem;
+    border-radius: 5px;
+    margin-top: .5em;
+  }
+  .toggle-button {
+    position: absolute;
+    top: .75rem;
+    right: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+}
+.toggleButt{
+  width: fit-content;
+  height: fit-content;
+}
+.toggle-button .bar {
+    height: 3px;
+    width: 100%;
+    background-color: rgb(71, 70, 70);
+    border-radius: 10px;
+}
+@media  screen and (max-width:800px){
+  body,html{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+  }
+  #navbar{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height:fit-content;
+    border: none;
+    background-color: #f3f5e3;
+    justify-content: center;
+    
+
+  }
+  .container{
+    width: 100%;
+    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 0;
+  }
+  #doc{
+    padding: 0;
+    margin: 0 auto;
+    width: 98%;
+    margin-top: 4rem;
+  }
+  #header{
+    text-align: center;
+    flex-direction: row;
+  }
+  .nav-link{
+    flex-grow: 1;
+    width: 100%;
+  }
+  .toggle-button {
+    display: flex;
+}
+.nav-wrap {
+  display:none;
+  flex-direction: column;
+  width: 100%;
+  margin-right: 0;
+}
+  .nav-link:hover{
+    transform: scale(1.1);
+   
+  }
+  .nav-wrap.active {
+    display: flex;
+}
+
+}
